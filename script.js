@@ -50,7 +50,7 @@ const defaultMass = [
 ]
 
 //1.
-const fullNames = defaultMass.map(element => `${element["first_name"]} ${element["last_name"]}`).join(', ')
+const fullNames = defaultMass.map( ({ first_name, last_name }) => `${first_name} ${last_name}` ).join(', ')
 console.log(fullNames)
 
 //2.
@@ -63,16 +63,11 @@ const objAge = {
 console.log(objAge)
 
 //3.
-const userNamesIDs = defaultMass.map(element => {
-    return {
-    "id": element["id"],
-    "full_name": `${element["first_name"]} ${element["last_name"]}`
-}
-})
+const userNamesIDs = defaultMass.map( ({ id, first_name, last_name }) => ({ id,"full_name": `${first_name} ${last_name}` }) )
 console.log(userNamesIDs)
 
 //4.
-const emails = defaultMass.map(element => element["email"]).sort((a, b) => a > b ? 1 : -1)
+const emails = defaultMass.map( ({ email }) => ({ email }) ).sort((a, b) => a > b ? 1 : -1)
 console.log(emails)
 
 //5.
