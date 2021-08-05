@@ -79,14 +79,8 @@ console.log(emails)
 const under40 = defaultMass.filter(element => element["age"] < 40).sort((a, b) => a["age"] > b["age"] ? 1 : -1)
 console.log(under40)
 
-//Создать объект, где ключ, это первая буква фамилии, а значение - массив из фамилий пользователей начинающихся на эту букву. Объект должен состоять только из ключей существующих фамилий в этом массиве. Например в этом массиве нет фамилии с букву Y, а значит и такого поля не должно быть в объекте.
-//Пример того, что надо получить, когда пользователи имеют следующие фамилии `Yasenko`, `Felton` , `Ford`, `Ferdinand`:
-//
-//    `{
-//       y: ['Yasenko'],
-//       f: ['Felton', 'Ford', 'Ferdinand'
-//    }`
-
+//6.
+const obj ={}
 let keys = defaultMass.map(element => element["last_name"]).join('').replace(/[^A-Z]/g, '').split('').reduce((a, b) => a.includes(b) ? a : [...a, b]).sort((a, b) => a > b ? 1 : -1)
 let values = defaultMass.map(element => element["last_name"]).sort((a, b) => a > b ? 1 : -1)
 
