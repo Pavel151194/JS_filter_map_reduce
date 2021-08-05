@@ -86,4 +86,3 @@ let values = defaultMass.map(element => element["last_name"]).sort((a, b) => a >
 
 console.log(keys)
 console.log(values)
-console.log(obj)
