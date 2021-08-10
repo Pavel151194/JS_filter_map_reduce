@@ -117,6 +117,12 @@ const writers = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",
 console.log(writers)
 
 //7. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив, с фильмами, где строка входит в название фильма.
-function foo (mass, str){
-
+function foo7(mass, str){
+    if(mass.map(element => element.title === str)) 
+    return mass.filter(element => element.title === str)
 }
+console.log(foo7(defaultMass, "Black Widow"))
+
+//8. Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив, с фильмами где число равно году выхода фильма.
+function foo8(mass, num){if(mass.map(element => element.year === num)) return mass.filter(element => element.year === num)}
+console.log(foo8(defaultMass, 2021))
