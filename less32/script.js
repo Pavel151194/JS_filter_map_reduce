@@ -113,7 +113,7 @@ console.log(films)
 
 
 //6. Создать массив авторов (поле writer) без повторений
-const writers = defaultMass.map(element => element.writer)
+const writers = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",")).join().split(',').filter((a, i, b) => b.indexOf(a) === i)
 console.log(writers)
 
 //7. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив, с фильмами, где строка входит в название фильма.
