@@ -124,13 +124,46 @@ console.log(writers)
 //7.
 function foo7(mass, str){ return mass.filter(element => element.title.toLowerCase().includes(str.toLowerCase())) }
 console.log(foo7(defaultMass, "pott"))
+//or
+function foo7_2(mass, str){
+    return mass.reduce((acc, element) => {
+        if(element.title.toLowerCase().includes(str.toLowerCase())){
+            return [...acc, element]
+        }
+        return acc
+    }, [])
+}
+console.log(foo7_2(defaultMass, "pott"))
 
 //8.
 function foo8(mass, num){ return mass.filter(element => element.year === num) }
 console.log(foo8(defaultMass, 2021))
+//or
+function foo8_2(mass, num){
+    return mass.reduce((acc, element) => {
+        if(element.year === num){
+            return [...acc, element]
+        }
+        return acc
+    }, [])
+}
+console.log(foo8_2(defaultMass, 2021))
 
 //9.
 function foo9(mass, str){ return mass.filter(element => element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase())) }
 console.log(foo9(defaultMass, "wid"))
+//or
+function foo9_2(mass, str){
+    return mass.reduce((acc, element) => {
+        if(element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase())){
+            return [...acc, element]
+        }
+        return acc
+    }, [])
+}
+console.log(foo9_2(defaultMass,"wid"))
 
 //10.
+function foo10(mass, str, strOrNum){
+
+}
