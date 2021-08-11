@@ -110,19 +110,26 @@ const films = defaultMass.map( ({ id, title, released, plot }) => ({ id, title, 
 console.log(films)
 
 //5. Создать объект, где ключ это имя актера, а значение - массив из фильмов с его участием
-
+//const obj5 = defaultMass.reduce( (acc, { actors }) => {
+//    const key = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",")).join().split(',').filter((a, i, b) => b.indexOf(a) === i)
+//    if(acc.hasOwnProperty(key)) return { ...acc, [key]: [...acc[key], actors], }
+//    return { ...acc, [key]: [actors] }
+//}, {} )
+//console.log(obj5)
 
 //6. Создать массив авторов (поле writer) без повторений
 const writers = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",")).join().split(',').filter((a, i, b) => b.indexOf(a) === i)
 console.log(writers)
 
-//7. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив, с фильмами, где строка входит в название фильма.
+//7. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив с фильмами, где строка входит в название фильма.
 function foo7(mass, str){
-    if(mass.map(element => element.title === str)) 
-    return mass.filter(element => element.title === str)
+    const option = str.toLowerCase()
+    return mass.filter(element => element.title.toLowerCase().includes(option))
 }
-console.log(foo7(defaultMass, "Black Widow"))
+console.log(foo7(defaultMass, "potter"))
 
-//8. Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив, с фильмами где число равно году выхода фильма.
-function foo8(mass, num){if(mass.map(element => element.year === num)) return mass.filter(element => element.year === num)}
+//8. Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив с фильмами, где число равно году выхода фильма.
+function foo8(mass, num){return mass.filter(element => element.year === num)}
 console.log(foo8(defaultMass, 2021))
+
+//9. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть отфильтрованный массив, с фильмами где строка входит в название фильма или в его сюжет.
