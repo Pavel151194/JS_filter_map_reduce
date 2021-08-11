@@ -93,19 +93,19 @@ const defaultMass = [
     }
 ]
 
-//1. Собрать в массив все жанры фильмов (без повторения)
+//1.
 const genres = defaultMass.map(element => element.genre).flat().filter((a, i, b) => b.indexOf(a) === i)
 console.log(genres)
 
-//2. Собрать в массив всех актеров всех фильмов (без повторения)
+//2.
 const actors = defaultMass.map(element => element.actors).flat().filter((a, i, b) => b.indexOf(a) === i)
 console.log(actors)
 
-//3. Отсортировать фильмы по рейтингу по убыванию
+//3.
 const ratings = defaultMass.sort((a, b) => a.imdbRating < b.imdbRating ? 1 : -1)
 console.log(ratings)
 
-//4. Создать новый массив, где объекты фильмов будут состоять из следующих полей: `id, title, released, plot`
+//4.
 const films = defaultMass.map( ({ id, title, released, plot }) => ({ id, title, released, plot }) )
 console.log(films)
 
@@ -117,19 +117,20 @@ console.log(films)
 //}, {} )
 //console.log(obj5)
 
-//6. Создать массив авторов (поле writer) без повторений
+//6.
 const writers = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",")).join().split(',').filter((a, i, b) => b.indexOf(a) === i)
 console.log(writers)
 
-//7. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть новый отфильтрованный массив с фильмами, где строка входит в название фильма.
-function foo7(mass, str){
-    const option = str.toLowerCase()
-    return mass.filter(element => element.title.toLowerCase().includes(option))
-}
-console.log(foo7(defaultMass, "potter"))
+//7.
+function foo7(mass, str){ return mass.filter(element => element.title.toLowerCase().includes(str.toLowerCase())) }
+console.log(foo7(defaultMass, "pott"))
 
-//8. Создать функцию, которая бы принимала массив фильмов и число. А результатом этой функции должен быть отфильтрованный массив с фильмами, где число равно году выхода фильма.
-function foo8(mass, num){return mass.filter(element => element.year === num)}
+//8.
+function foo8(mass, num){ return mass.filter(element => element.year === num) }
 console.log(foo8(defaultMass, 2021))
 
-//9. Создать функцию, которая бы принимала массив фильмов и строку. А результатом этой функции должен быть отфильтрованный массив, с фильмами где строка входит в название фильма или в его сюжет.
+//9.
+function foo9(mass, str){ return mass.filter(element => element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase())) }
+console.log(foo9(defaultMass, "wid"))
+
+//10.
