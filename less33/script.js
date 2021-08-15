@@ -78,12 +78,15 @@ const ingredients = defualtMass.reduce( (acc, { ingredients }) => [...new Set([.
 console.log(ingredients)
 
 //2.
-const productsById = (mass, id) =>
+filterById = (mass, id) => { return mass.filter(element => element.id === id) }
+console.log(...filterById(defualtMass, 8))
+//or
+const preduceById = (mass, id) =>
     mass.reduce((acc, mass) => {
     if(id === mass.id) return (acc = mass) 
     return acc
 }, {})
-console.log(productsById(defualtMass, 8))
+console.log(preduceById(defualtMass, 8))
 
 //3.
 const sortByPrice = defualtMass.sort((a, b) => a.price - b.price)
@@ -120,6 +123,15 @@ console.log(reduceByIngredients(defualtMass, "sauce"))
 //7. Создать функцию, которая принимает массив продуктов и массив ингредиентов, и возвращает массив с продуктами, где содержатся такие ингредиенты.
 
 //8. Создать функцию, которая принимает массив продуктов и цену, и возвращает массив продуктов, где цена продукта ниже или равна цене из второго аргумента функции.
+const filterByPrice = (mass, num) => { return mass.filter(element => element.price <= num) }
+console.log(filterByPrice(defualtMass, 4))
+//or
+const reduceByPrice = (mass, num) =>
+    mass.reduce((acc, element) => {
+    if(element.price <= num) return [...acc, element]
+    return acc
+}, [])
+console.log(reduceByPrice(defualtMass, 4))
 
 //9. Создать функцию, которая принимает массив продуктов и массив айдишников, и возвращает строку, где строка включает в себя название продуктов и их цену через запятую, у которых айдишники совпадают.
 Например: `"Биг Тейсти: цена 4€, Картофель по-деревенски: 2$"`
