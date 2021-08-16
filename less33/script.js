@@ -120,9 +120,18 @@ const reduceByIngredients = (mass, str) =>
 }, [])
 console.log(reduceByIngredients(defualtMass, "sauce"))
 
-//7. Создать функцию, которая принимает массив продуктов и массив ингредиентов, и возвращает массив с продуктами, где содержатся такие ингредиенты.
+//7.
+const filterByIngredients = (massOfProducts, massOfIngredients) => { return massOfProducts.filter(element => [...new Set([...element.ingredients, ...massOfIngredients])].join() === element.ingredients.join()) }
+console.log(filterByIngredients(defualtMass, ["cheese", "sauce"]))
+//or
+const reduceByIngredients = (massOfProducts, massOfIngredients) =>
+    massOfProducts.reduce((acc, element) => {
+    if([...new Set([...element.ingredients, ...massOfIngredients])].join() === element.ingredients.join()) return [...acc, element]
+    return acc
+}, [])
+console.log(reduceByIngredients(defualtMass, ["cheese", "sauce"]))
 
-//8. Создать функцию, которая принимает массив продуктов и цену, и возвращает массив продуктов, где цена продукта ниже или равна цене из второго аргумента функции.
+//8.
 const filterByPrice = (mass, num) => { return mass.filter(element => element.price <= num) }
 console.log(filterByPrice(defualtMass, 4))
 //or
