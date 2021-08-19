@@ -1,4 +1,4 @@
-const defualtMass = [
+const products = [
     {
     id: 1,
     name: "Биг Тейсти",
@@ -73,79 +73,136 @@ const defualtMass = [
     }
 ]
 
+const UserOptions = [
+    {
+    id: 1,
+    ingredient: "flour",
+    active: true
+    },
+    {
+    id: 2,
+    ingredient: "beef",
+    active: false
+    },
+    {
+    id: 3,
+    ingredient: "cheese",
+    active: true
+    },
+    {
+    id: 4,
+    ingredient: "sauce",
+    active: true
+    },
+    {
+    id: 5,
+    ingredient: "cucumber",
+    active: true
+    },
+    {
+    id: 6,
+    ingredient: "chicken",
+    active: false
+    },
+    {
+    id: 7,
+    ingredients: "potato",
+    active: true
+    },
+    {
+    id: 8,
+    ingredients: "salad",
+    active: true
+    }
+] 
+
+
+//Part 1:
 //1.
-const ingredients = defualtMass.reduce( (acc, { ingredients }) => [...new Set([...acc, ...ingredients])], [] )
+const ingredients = products.reduce( (acc, { ingredients }) => [...new Set([...acc, ...ingredients])], [] )
 console.log(ingredients)
 
 //2.
 filterById = (mass, id) => { return mass.filter(element => element.id === id) }
-console.log(...filterById(defualtMass, 8))
+console.log(...filterById(products, 8))
 //or
 const preduceById = (mass, id) =>
     mass.reduce((acc, mass) => {
     if(id === mass.id) return (acc = mass) 
     return acc
 }, {})
-console.log(preduceById(defualtMass, 8))
+console.log(preduceById(products, 8))
 
 //3.
-const sortByPrice = defualtMass.sort((a, b) => a.price - b.price)
+const sortByPrice = products.sort((a, b) => a.price - b.price)
 console.log(sortByPrice)
 
 //4.
-const groupByTypes = defualtMass.reduce((acc, array) => {
+const groupByTypes = products.reduce((acc, array) => {
     if(!acc[array.type]) return { ...acc, [array.type]: [array] }
     return { ...acc, [array.type]: [...acc[array.type], array] }
 }, {})
 console.log(groupByTypes)
 
 //5.
-const filterByAvailable = defualtMass.filter(element => element.available)
+const filterByAvailable = products.filter(element => element.available)
 console.log(filterByAvailable)
 //or
-const reduceByAvailable = defualtMass.reduce((acc, array) => {
+const reduceByAvailable = products.reduce((acc, array) => {
     if(array.available) return [...acc, array]
     return acc
 }, [])
 console.log(reduceByAvailable)
 
 //6.
-const filterByIngredients = (mass, str) => { return mass.filter(element => element.ingredients.includes(str)) }
-console.log(filterByIngredients(defualtMass, "sauce"))
+const filterByIngredient = (mass, str) => { return mass.filter(element => element.ingredients.includes(str)) }
+console.log(filterByIngredient(products, "sauce"))
 //or
-const reduceByIngredients = (mass, str) =>
+const reduceByIngredient = (mass, str) =>
     mass.reduce((acc, element) => {
     if(element.ingredients.includes(str)) return [...acc, element]
     return acc
 }, [])
-console.log(reduceByIngredients(defualtMass, "sauce"))
+console.log(reduceByIngredient(products, "sauce"))
 
 //7.
 const filterByIngredients = (massOfProducts, massOfIngredients) => { return massOfProducts.filter(element => [...new Set([...element.ingredients, ...massOfIngredients])].join() === element.ingredients.join()) }
-console.log(filterByIngredients(defualtMass, ["cheese", "sauce"]))
+console.log(filterByIngredients(products, ["cheese", "sauce"]))
 //or
 const reduceByIngredients = (massOfProducts, massOfIngredients) =>
     massOfProducts.reduce((acc, element) => {
     if([...new Set([...element.ingredients, ...massOfIngredients])].join() === element.ingredients.join()) return [...acc, element]
     return acc
 }, [])
-console.log(reduceByIngredients(defualtMass, ["cheese", "sauce"]))
+console.log(reduceByIngredients(products, ["cheese", "sauce"]))
 
 //8.
 const filterByPrice = (mass, num) => { return mass.filter(element => element.price <= num) }
-console.log(filterByPrice(defualtMass, 4))
+console.log(filterByPrice(products, 4))
 //or
 const reduceByPrice = (mass, num) =>
     mass.reduce((acc, element) => {
     if(element.price <= num) return [...acc, element]
     return acc
 }, [])
-console.log(reduceByPrice(defualtMass, 4))
+console.log(reduceByPrice(products, 4))
 
-//9. Создать функцию, которая принимает массив продуктов и массив айдишников, и возвращает строку, где строка включает в себя название продуктов и их цену через запятую, у которых айдишники совпадают.
-Например: `"Биг Тейсти: цена 4€, Картофель по-деревенски: 2$"`
+//9.
+const reduceByIds = (massOfProducts, massOfIds) =>
+    massOfProducts.reduce( (acc, element) => {
+        const currencyValue = () => {
+            if(element.currency === "euro") return '€'
+            if(element.currency === "usd") return '$'
+        }
+        if(massOfIds.includes(element.id)) return `${acc} ${element.name}: цена ${element.price}${currencyValue()},`
+        return acc
+}, '')
+console.log(reduceByIds(products, [8, 1, 5]))
 
 //10. Создать функцию, которая принимает массив продуктов и массив айдишников, и возвращает объект, c общими суммами цен продуктов(у которых айдишники совпадают) по каждой валюте.
 Например: `{ euro: 20, usd: 6}`
 
 //11. Создать функцию, которая принимает массив продуктов и массив айдишников, и строку, где число равно сумме цен продуктов + значок валюты. При этом если, у нас попадают продукты с разными валютами, то мы должны получить сумму в евро и перевести доллары в евро(использовать для этого курс евро/доллар).
+
+
+//Part 2:
