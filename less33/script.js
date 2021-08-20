@@ -199,16 +199,12 @@ const reduceByIds = (massOfProducts, massOfIds) =>
 }, '')
 console.log(reduceByIds(products, [8, 1, 5]))
 
-//10. Создать функцию, которая принимает массив продуктов и массив айдишников, и возвращает объект, c общими суммами цен продуктов(у которых айдишники совпадают) по каждой валюте.
-Например: `{ euro: 20, usd: 6}`
+//10.
 
-
-//11. Создать функцию, которая принимает массив продуктов и массив айдишников, и строку, где число равно сумме цен продуктов + значок валюты. При этом если, у нас попадают продукты с разными валютами, то мы должны получить сумму в евро и перевести доллары в евро(использовать для этого курс евро/доллар).
-
+//11.
 
 //Part 2:
-//1. Создать массив объектов вида { categoryName: 'burger', products: [...]}. 'burger'  - это наше поле type
-
+//1.
 
 //2.
 const reduceByOptionsIngridients = (massOfProducts, massOfOptions) => {
@@ -220,11 +216,10 @@ console.log(reduceByOptionsIngridients(products, userOptions))
 
 
 //4.
-const reduceByProductsOrIngridients = (mass, string) => {
-    return mass.reduce( (acc, element) => {
-        if(element.name.includes(string) || element.ingredients.some( (ingredient) => ingredient.includes(string) )) return [...acc, element]
-        return acc
-    }, [])
-}
+const reduceByProductsOrIngridients = (massOfProducts, string) => (
+    massOfProducts.reduce( (acc, product) => (
+        product.name.includes(string) || product.ingredients.some( (ingredient) => ingredient.includes(string) ) ? [...acc, product] : acc
+    ), [])
+)
 console.log(reduceByProductsOrIngridients(products, "бург"))
 console.log(reduceByProductsOrIngridients(products, "chee"))
