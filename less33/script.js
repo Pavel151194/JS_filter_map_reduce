@@ -211,10 +211,20 @@ console.log(reduceByIds(products, [8, 1, 5]))
 
 
 //2.
-const reduceByOptions = (massOfProducts, massOfOptions) => {
+const reduceByOptionsIngridients = (massOfProducts, massOfOptions) => {
     const falseIngridients = massOfOptions.reduce( (acc, { ingredient, active }) => (!active ? [...acc, ingredient] : acc), [])
     return massOfProducts.reduce( (acc, product) => (!product.ingredients.some( (ingredient) => falseIngridients.includes(ingredient)) ? [...acc, product] : acc), [])
 }
-console.log(reduceByOptions(products, userOptions))
+console.log(reduceByOptionsIngridients(products, userOptions))
+//3.
 
-//4. Создать функцию, которая принимает массив продуктов и строку, и возвращает отфильтрованный массив, где строка входит в название продукта или ингредиента.
+
+//4.
+const reduceByProductsOrIngridients = (mass, string) => {
+    return mass.reduce( (acc, element) => {
+        if(element.name.includes(string) || element.ingredients.some( (ingredient) => ingredient.includes(string) )) return [...acc, element]
+        return acc
+    }, [])
+}
+console.log(reduceByProductsOrIngridients(products, "бург"))
+console.log(reduceByProductsOrIngridients(products, "chee"))
