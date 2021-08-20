@@ -210,11 +210,11 @@ console.log(reduceByIds(products, [8, 1, 5]))
 //1. Создать массив объектов вида { categoryName: 'burger', products: [...]}. 'burger'  - это наше поле type
 
 
-//2. Основываясь на настройки ингредиента пользователя. Создать функцию, которая вернет продукты, в которых не содержится запрещенных пользователем ингредиентов.
+//2.
 const reduceByOptions = (massOfProducts, massOfOptions) => {
-    const falseIngridients = massOfOptions.reduce( (acc, { ingredient, active }) => (!active ? [...acc, ingredient] : acc), [])//["beef", "chicken"]
-    
+    const falseIngridients = massOfOptions.reduce( (acc, { ingredient, active }) => (!active ? [...acc, ingredient] : acc), [])
+    return massOfProducts.reduce( (acc, product) => (!product.ingredients.some( (ingredient) => falseIngridients.includes(ingredient)) ? [...acc, product] : acc), [])
 }
 console.log(reduceByOptions(products, userOptions))
 
-
+//4. Создать функцию, которая принимает массив продуктов и строку, и возвращает отфильтрованный массив, где строка входит в название продукта или ингредиента.
