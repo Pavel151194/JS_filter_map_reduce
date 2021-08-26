@@ -109,15 +109,15 @@ console.log(ratings)
 const films = defaultMass.map( ({ id, title, released, plot }) => ({ id, title, released, plot }) )
 console.log(films)
 
-//5. Создать объект, где ключ это имя актера, а значение - массив из фильмов с его участием
-const obj5 = defaultMass.reduce( (acc, { actors }) => {
-    const key = actors.filter((a, i, b) => b.indexOf(a) === i)
-    console.log(key)
-
-    if(acc.hasOwnProperty(key)) return { ...acc, [key]: [...acc[key], actors], }
-    return { ...acc, [key]: [actors] }
-}, {} )
-console.log(obj5)
+//5.
+//const task5 = defaultMass.reduce((actors, element) => 
+//    element.actors.reduce((acc, item) => {
+//        if(!acc[item]) acc[item] = []
+//        acc[item].push(element)
+//        return {...acc, acc[actor]: [...acc[actor], elemnt]
+//    }, actors)
+//, {})
+//console.log(task5)
 
 //6.
 const writers = defaultMass.map(element => element.writer.replace(/\s*,\s*/g, ",")).join().split(',').filter((a, i, b) => b.indexOf(a) === i)
@@ -129,7 +129,7 @@ console.log(filterByTitle(defaultMass, "pott"))
 //or
 const reduceByTitle = (mass, str) => {
     return mass.reduce((acc, element) => {
-        if(element.title.toLowerCase().includes(str.toLowerCase()) ){ return [...acc, element] }
+        if(element.title.toLowerCase().includes(str.toLowerCase()) ) return [...acc, element]
         return acc
     }, [])
 }
@@ -141,7 +141,7 @@ console.log(filterByYear(defaultMass, 2021))
 //or
 const reduceByYear = (mass, num) => {
     return mass.reduce((acc, element) => {
-        if(element.year === num){ return [...acc, element] }
+        if(element.year === num) return [...acc, element]
         return acc
     }, [])
 }
@@ -149,21 +149,21 @@ console.log(reduceByYear(defaultMass, 2021))
 
 //9.
 const filterByPlotOrTitle = (mass, str) => { return mass.filter(element => element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase())) }
-console.log(foo9(defaultMass, "wid"))
+console.log(filterByPlotOrTitle(defaultMass, "wid"))
 //or
 const reduceByPlotOrTitle = (mass, str) => {
     return mass.reduce((acc, element) => {
-        if(element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase()) ){ return [...acc, element] }
+        if(element.plot.toLowerCase().includes(str.toLowerCase()) || element.title.toLowerCase().includes(str.toLowerCase()) ) return [...acc, element]
         return acc
     }, [])
 }
-console.log(foo9_2(defaultMass,"wid"))
+console.log(reduceByPlotOrTitle(defaultMass,"wid"))
 
 //10.
-function foo10(mass, key, value){
-    //if(key === "title"){ return mass.filter(element => element[key].toLowerCase().includes(value.toLowerCase())) }
-    //if(key === "year"){ return mass.filter(element => element[key] === value) }
-
-}
-console.log(foo10(defaultMass,"title", "pott"))
-console.log(foo10(defaultMass,"year", 2021))
+const reduceByKeyAndValue = (mass, key, value) => 
+    mass.reduce((acc, item) => {
+        if(typeof item[key] !== undefined && item[key] == value) return [...acc, item]
+        return acc
+}, [])
+console.log(reduceByKeyAndValue(defaultMass, "title", "Star Wars"))
+console.log(reduceByKeyAndValue(defaultMass, "year", 2021))
