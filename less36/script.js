@@ -56,3 +56,5 @@ const summOfAge = users.reduce( (acc, { age }) => (acc + age), null)
 console.log(summOfAge)
 
 //3. Получить новый массив, где пользователи младше 40.
+const under40 = users.reduce( (acc, user) => (user.age < 40 ? [...acc, user] : acc), [])
+console.log(under40)
