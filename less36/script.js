@@ -49,12 +49,17 @@ const users = [
     }
 ]
 
-//1. Из массива пользователей получить объект, где ключ это значение поле `id`, а значение его `email`
+//1.
+const usersEmailById = users.reduce( (acc, user) => {
+    if(!acc[user.id]) return { ...acc, [user.id]: user.email }
+    return { ...acc, [user.id]: [...acc[user.id], user.email] }
+}, {})
+console.log(usersEmailById)
 
 //2.
-const summOfAge = users.reduce( (acc, { age }) => (acc + age), null)
+const summOfAge = users.reduce( (acc, { age }) => (acc + age), null )
 console.log(summOfAge)
 
-//3. Получить новый массив, где пользователи младше 40.
-const under40 = users.reduce( (acc, user) => (user.age < 40 ? [...acc, user] : acc), [])
-console.log(under40)
+//3.
+const usersUnder40 = users.reduce( (acc, user) => (user.age < 40 ? [...acc, user] : acc), [] )
+console.log(usersUnder40)
