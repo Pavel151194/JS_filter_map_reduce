@@ -50,10 +50,7 @@ const users = [
 ]
 
 //1.
-const usersEmailById = users.reduce( (acc, user) => {
-    if(!acc[user.id]) return { ...acc, [user.id]: user.email }
-    return { ...acc, [user.id]: [...acc[user.id], user.email] }
-}, {})
+const usersEmailById = users.reduce( (acc, { id, email }) => ({ ...acc, [id]: email }), {} )
 console.log(usersEmailById)
 
 //2.
